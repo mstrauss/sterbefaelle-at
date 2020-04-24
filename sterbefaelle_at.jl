@@ -1,3 +1,5 @@
+ENV["GKS_ENCODING"]="utf-8"
+
 using CSV
 using DataFrames
 using Plots
@@ -5,16 +7,19 @@ using Plots.PlotMeasures
 using Printf
 using Statistics
 
+csv_dirname = "data"
 csv_filename = "OGD_gest_kalwo_GEST_KALWOCHE_100.csv"
-local_filename = joinpath("data", csv_filename)
-if isfile(local_filename)
-    @printf("Reading %s.\n", local_filename)
-    df_raw = CSV.read(local_filename)
-else
-    df_raw = CSV.read(download(
-        "https://data.statistik.gv.at/data/OGD_gest_kalwo_GEST_KALWOCHE_100.csv"
-    ))
+local_filename = joinpath(csv_dirname, csv_filename)
+if !isfile(local_filename)
+    url = "https://data.statistik.gv.at/data/OGD_gest_kalwo_GEST_KALWOCHE_100.csv"
+    @printf("Downloading and saving data from %s...", url)
+    tmpfile = download(url)
+    isdir(csv_dirname) || mkdir(csv_dirname)
+    mv(tmpfile, local_filename)
 end
+
+@printf("Reading %s.\n", local_filename)
+df_raw = CSV.read(local_filename)
 
 df_unstacked = unstack(df_raw,
                        [
@@ -34,7 +39,7 @@ df.week = (x->parse(Int,x[10:11])).(df.week)
 
 # offset week based on start and end weeks
 start_week = -10
-end_week = 14
+end_week = 15
 for year in unique(df.year)[1:end-1]
     sel = (df.year .== year) .& (df.week .> end_week)
     no_weeks_this_year = maximum(df.week[df.year.==year])
@@ -90,7 +95,7 @@ for year in 2009:2020
         color = colorant"#e66101"
         linewidth = 3
         alpha = 1.0
-        label = "2019/20 (KW 12–14 vorl. Schätzung)"
+        label = "2019/20 (vorläufige Daten)"
     elseif year == 2017
         color = colorant"#fdb863"
         linewidth = 1.75
@@ -122,7 +127,7 @@ plot!(annotate=(start_week-3, 4550, text("Sterbefälle in Österreich 2019/2020"
 plot!(annotate=(start_week-3, 4300, text("nach Kalenderwochen", :left, 10)))
 
 # original: https://apa.liveblog.pro/apa/20200420120448/4ab3006a5ed1d98669d816405f5eb2e4e7c51c0c75eb4dd5786ae31b9edf1a6b.jpg
-plot!(annotate=(start_week-3, -750, text("Daten: Statistik Austria, Grafik: Markus Strauss, adaptiert nach APA-Grafik\nhttps://apa.liveblog.pro/apa/20200420120448/4ab3006a5ed1d98669d816405f5eb2e4e7c51c0c75eb4dd5786ae31b9edf1a6b.jpg", :left, 4)))
+plot!(annotate=(start_week-3, -750, text("Datenquelle: Statistik Austria - data.statistik.gv.at; Grafik: Markus Strauss, adaptiert nach APA-Grafik\nhttps://apa.liveblog.pro/apa/20200420120448/4ab3006a5ed1d98669d816405f5eb2e4e7c51c0c75eb4dd5786ae31b9edf1a6b.jpg", :left, 4)))
 
 # export
 savefig("sterbefaelle_at.pdf")
