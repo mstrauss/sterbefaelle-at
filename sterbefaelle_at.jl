@@ -127,7 +127,7 @@ plot!(annotate=(start_week-3, 4550, text("Sterbefälle in Österreich 2019/2020"
 plot!(annotate=(start_week-3, 4300, text("nach Kalenderwochen", :left, 10)))
 
 # original: https://apa.liveblog.pro/apa/20200420120448/4ab3006a5ed1d98669d816405f5eb2e4e7c51c0c75eb4dd5786ae31b9edf1a6b.jpg
-plot!(annotate=(start_week-3, -750, text("Datenquelle: Statistik Austria - data.statistik.gv.at; Grafik: Markus Strauss, adaptiert nach APA-Grafik\nhttps://apa.liveblog.pro/apa/20200420120448/4ab3006a5ed1d98669d816405f5eb2e4e7c51c0c75eb4dd5786ae31b9edf1a6b.jpg", :left, 4)))
+plot!(annotate=(start_week-3, -750, text("Datenquelle: Statistik Austria - data.statistik.gv.at\nAnalyse: Markus Strauss - https://github.com/mstrauss/sterbefaelle-at", :left, 4)))
 
 # export
 savefig("sterbefaelle_at.pdf")
