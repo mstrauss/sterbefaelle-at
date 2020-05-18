@@ -40,9 +40,8 @@ df = aggregate(coalesce.(df_unstacked[[:week, :below65, :above65]], 0), :week, s
 df.year = (x->parse(Int,x[6:9])).(df.week)
 df.week = (x->parse(Int,x[10:11])).(df.week)
 
-# offset week based on start and end weeks
-start_week = -10
-end_week = 17
+include("settings.jl")
+
 for year in unique(df.year)[1:end-1]
     sel = (df.year .== year) .& (df.week .> end_week)
     no_weeks_this_year = maximum(df.week[df.year.==year])
