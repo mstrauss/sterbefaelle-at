@@ -55,7 +55,7 @@ rename!(df_obs, [:week, :below65, :above65, :year])
 df_cmp = aggregate(df_obs[[:week, :below65, :above65]], :week, [mean, std])
 df_cmp_sel = df_cmp[start_week .<= df_cmp.week .<= end_week, :]
 
-xticks = -10:3:17
+xticks = start_week:3:end_week
 xticks = (xticks, map(x->@sprintf("%s", x < 0 ? x+52 : x), xticks))
 
 # the averages from previous years
