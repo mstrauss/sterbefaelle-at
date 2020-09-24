@@ -9,7 +9,7 @@
 #      ]
 
 task :clean_data do
-  rm "data/OGD_gest_kalwo_GEST_KALWOCHE_100.csv"
+  rm_rf "data/OGD_gest_kalwo_GEST_KALWOCHE_100.csv"
 end
 
 task :run do

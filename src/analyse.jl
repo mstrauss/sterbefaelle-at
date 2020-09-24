@@ -1,4 +1,7 @@
-function analyse(df_unstacked, filename="deceased_at", lang=:en)
+function analyse(df_unstacked,
+                 filename="deceased_at",
+                 lang=:en,
+                 location="Austria")
 
     df = aggregate(coalesce.(df_unstacked[[:week, :below65, :above65]], 0), :week, sum)
 
@@ -28,7 +31,7 @@ function analyse(df_unstacked, filename="deceased_at", lang=:en)
         lab3 = "2008/09–2018/19 (nicht: 16/17, 17/18)"
         lab4 = "über 65-Jährige"
         lab5 = "0 bis 64-Jährige"
-        lab6 = "Sterbefälle in Österreich 2019/2020"
+        lab6 = "Sterbefälle in $(location) 2019/2020"
         lab7 = "nach Kalenderwochen"
         lab8 = "Datenquelle: Statistik Austria - data.statistik.gv.at\nAnalyse: Markus Strauss - https://github.com/mstrauss/sterbefaelle-at"
     else
@@ -38,7 +41,7 @@ function analyse(df_unstacked, filename="deceased_at", lang=:en)
         lab3 = "2008/09–2018/19 (excl. 16/17, 17/18)"
         lab4 = "age ≥ 65"
         lab5 = "age < 65"
-        lab6 = "Deceased in Austria, 2019/2020"
+        lab6 = "Deceased in $(location), 2019/2020"
         lab7 = "(absolute weekly numbers by age group)"
         lab8 = "Data source: Statistik Austria - data.statistik.gv.at\nAnalysis: Markus Strauss - https://github.com/mstrauss/sterbefaelle-at"
     end

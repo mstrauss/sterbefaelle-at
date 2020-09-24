@@ -8,17 +8,17 @@ function wien()
     df_unstacked = remote_data()
     @printf("Only keeping data from Vienna.\n")
     df_unstacked = df_unstacked[df_unstacked.province.=="B00-9", :]
-    analyse(df_unstacked, "sterbefaelle_wien", :de)
+    analyse(df_unstacked, "sterbefaelle_wien", :de, "Wien")
 end
 
 function at_de()
     df_unstacked = remote_data()
-    analyse(df_unstacked, "sterbefaelle_at", :de)
+    analyse(df_unstacked, "sterbefaelle_at", :de, "Österreich")
 end
 
 function at_en()
     df_unstacked = remote_data()
-    analyse(df_unstacked, "deceased_at", :en)
+    analyse(df_unstacked, "deceased_at", :en, "Austria")
 end
 
 function run()
