@@ -26,7 +26,7 @@ function analyse(df_unstacked,
 
     if lang == :de
         xlabel = "Kalenderwoche"
-        lab1 = "2008/09–2018/19 Mittelwert/Std.abw."
+        lab1 = "2008/09–2018/19 Mittelw. / punktw. 95% Konf.int."
         lab2 = "2019/20 (vorläufige Daten)"
         lab3 = "2008/09–2018/19 (nicht: 16/17, 17/18)"
         lab4 = "über 65-Jährige"
@@ -36,7 +36,7 @@ function analyse(df_unstacked,
         lab8 = "Datenquelle: Statistik Austria - data.statistik.gv.at\nAnalyse: Markus Strauss - https://github.com/mstrauss/sterbefaelle-at"
     else
         xlabel = "week"
-        lab1 = "2008/09–2018/19 mean/std.dev."
+        lab1 = "2008/09–2018/19 mean / pointw. 95% conf. int."
         lab2 = "2019/20 (prelim. data)"
         lab3 = "2008/09–2018/19 (excl. 16/17, 17/18)"
         lab4 = "age ≥ 65"
@@ -47,18 +47,18 @@ function analyse(df_unstacked,
     end
 
     if maximum(df_cmp_sel.above65_mean) > 380
-        ymax = 2200
-        lab4y = 1600
+        ymax = 2500
+        lab4y = 2300
         lab5y = 450
-        lab6y = 3800
-        lab7y = 3550
+        lab6y = 4200
+        lab7y = 3950
         lab8y = -750
     else
-        ymax = 380
-        lab4y = 340
+        ymax = 440
+        lab4y = 420
         lab5y = 110
-        lab6y = 650
-        lab7y = 600
+        lab6y = 750
+        lab7y = 700
         lab8y = -120
     end
 
@@ -79,11 +79,11 @@ function analyse(df_unstacked,
          )
 
     plot!(df_cmp_sel.week, df_cmp_sel.below65_mean,
-          ribbon=df_cmp_sel.below65_std,
+          ribbon=df_cmp_sel.below65_std*2,
           label=lab1,
           color=:gray, linestyle=:dash)
     plot!(df_cmp_sel.week, df_cmp_sel.above65_mean,
-          ribbon=df_cmp_sel.above65_std,
+          ribbon=df_cmp_sel.above65_std*2,
           label=:none,
           color=:gray, linestyle=:dash)
 
