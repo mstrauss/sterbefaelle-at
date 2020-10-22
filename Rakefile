@@ -13,7 +13,7 @@ task :clean_data do
 end
 
 task :run do
-  sh "julia all.jl"
+  sh "julia --project=. all.jl"
 end
 
 task :default => [:clean_data, :run]
