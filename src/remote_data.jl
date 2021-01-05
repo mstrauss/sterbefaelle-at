@@ -21,7 +21,7 @@ function remote_data()
     end
 
     @printf("Reading %s.\n", local_filename)
-    df_raw = CSV.read(local_filename)
+    df_raw = CSV.read(local_filename, DataFrame)
 
     df_unstacked = unstack(df_raw,
                            [
