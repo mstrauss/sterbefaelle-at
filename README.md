@@ -1,6 +1,6 @@
 # README
 
-Data source: [Statistik Austria, "Gestorbene in Österreich (ohne Auslandssterbefälle) ab 2000 nach Kalenderwoche"](https://data.statistik.gv.at/web/meta.jsp?dataset=OGD_gest_kalwo_GEST_KALWOCHE_100).
+Data source: [Statistik Austria, "Gestorbene in Österreich (ohne Auslandssterbefälle) ab 2000 nach Kalenderwoche"](https://data.statistik.gv.at/web/meta.jsp?dataset=OGD_gest_kalwo_GEST_KALWOCHE_100) ("Deaths in Austria from 2000 (excl. deaths abroad) by calendar week").  Data are not inlcuded in this repo.
 
 License of the Julia source code: see LICENSE.
 
@@ -19,7 +19,9 @@ License of the Julia source code: see LICENSE.
 - Clone the repository.
 - Run `julia --project=.` from the repo base directory.
 - From within Julia execute `Pkg.status()` to show required Julia packages and `Pkg.instantiate()` to install them.  Exit Julia.
-- Run `rake` 
+- Run `rake`, which downloads the data and runs the analysis.
+
+
 
 
 
